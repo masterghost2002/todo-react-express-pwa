@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start":"prisma generate && node server.js",
     "dev": "nodemon index.ts"
   },
   "dependencies": {

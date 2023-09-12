@@ -46,7 +46,7 @@ export default function useFetchData(): resfetchReturnType {
     if(!isOnline) return;
     try {    
       const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}`}});      
-      const res = await authReq.get('https://calm-pink-chinchilla-tie.cyclic.app/api/todos/');
+      const res = await authReq.get('https://todo-api-toz9.onrender.com/api/todos/');
       const data = res.data;
       const { todos, ...user }: { todos: Todo[], user: User } = data;
       if (todos)

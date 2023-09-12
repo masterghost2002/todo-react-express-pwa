@@ -1,11 +1,8 @@
 require('dotenv').config();
 import express, {Request, Response} from 'express';
 const app = express();
-let corsOptions = {
-    origin: [ 'https://todo-react-express-pwa.vercel.app/', 'http://localhost:3000', 'http://localhost:5173/' ]
-};
 import cors from 'cors';
-app.use(cors(corsOptions));
+app.use(cors());
 import getTodo from './controller/get-todos/route';
 import deleteTodo from './controller/delete-todo/route';
 import postTodo from './controller/create-todo/route';

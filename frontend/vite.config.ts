@@ -36,6 +36,11 @@ const manifestForPlugIn = {
         "type": "image/png"
       },
       {
+        "src": "/Logo.png",
+        "sizes": "384x384",
+        "type": "image/png"
+      },
+      {
         "src": "/icon-512x512.png",
         "sizes": "512x512",
         "type": "image/png"

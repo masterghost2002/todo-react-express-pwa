@@ -150,7 +150,7 @@ export default function TodoHolder() {
         </div>
       }
       {todos && filteredTodos.length > 0 ?
-        filteredTodos.map((todo, index) => {
+        filteredTodos.map((todo) => {
           const keyId = nanoid();
           return (
             <TodoCard
@@ -164,7 +164,7 @@ export default function TodoHolder() {
         }
         )
         :
-        todos.map((todo, index) => {
+        todos.map((todo) => {
           const keyId = nanoid();
           return (
             <TodoCard

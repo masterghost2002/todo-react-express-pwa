@@ -45,6 +45,7 @@ export default React.memo(function TodoCard({ todo, handleOnDelete, handleTagCli
       const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });
       await authReq.put(`http://localhost:5000/api/todos/update-todo/${todo.id}/${index}`);
       const task = pendingTasks[index];
+      // @ts-ignore
       const _pendingTasks = pendingTasks.filter((task, id) => id !== index);
       setPendingTasks(_pendingTasks);
       setCompletedTasks(
@@ -181,7 +182,7 @@ export default React.memo(function TodoCard({ todo, handleOnDelete, handleTagCli
         className='flex flex-wrap w-full p-2 gap-5'
       >
         {
-          todo.tags && todo.tags.map((tag, index) => {
+          todo.tags && todo.tags.map((tag) => {
             const keyId = nanoid();
             return (
               <div

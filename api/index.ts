@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express, {Request, Response} from 'express';
 import getTodo from './controller/get-todos/route';
 import deleteTodo from './controller/delete-todo/route';

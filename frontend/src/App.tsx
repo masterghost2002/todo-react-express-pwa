@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { gapi } from "gapi-script"
 import { Route, Routes } from "react-router-dom"
-import Login from "./component/Login"
+import LoginPage from "./pages/LoginPage"
 import RootLayout from "./RootLayout"
 import { Toaster } from "react-hot-toast"
 import Todos from './pages/Todos';
@@ -23,7 +23,7 @@ export default function App() {
     >
       <div><Toaster /></div>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/todos" element={<RootLayout />}>
           <Route index element={<Todos/>}/>
           <Route path="create-todo" element={<CreateTodo/>}/>

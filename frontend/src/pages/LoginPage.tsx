@@ -9,7 +9,7 @@ export default function LoginPage() {
     const accessToken = localStorage.getItem('accessToken');
     if(!isOnline && accessToken)
       navigate('/todos');
-  }, [])
+  }, []);
   return (
         <Login/>
   )

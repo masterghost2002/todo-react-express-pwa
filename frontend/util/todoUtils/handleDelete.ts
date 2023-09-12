@@ -32,7 +32,6 @@ const handleOfflineDelete = (todoId: string) => {
         if (_filteredPendingNewTodo.length > 0) {
             localStorage.setItem('pendingNewTodo', _stringifyPendingNewTodo);
         }
-        console.log('hello');
         return;
     }
 

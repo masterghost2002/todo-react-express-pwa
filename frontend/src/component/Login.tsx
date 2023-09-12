@@ -7,7 +7,7 @@ export default function Login() {
     localStorage.setItem('google_token', response.tokenId);
     const authReq = axios.create({ headers: { google_token: `Bearer ${response.tokenId}` } });
     try {
-      const res = await authReq.post('https://calm-pink-chinchilla-tie.cyclic.app/api/user/init');
+      const res = await authReq.post('https://todo-api-toz9.onrender.com/api/user/init');
       const accessToken = res.data.accessToken;
       localStorage.setItem('accessToken', accessToken);
       navigate('/todos')

@@ -68,6 +68,7 @@ export default function TodoForm({ isUploading, handleSave, todo = undefined }: 
 
     }
     const removeTag = (index:number)=>{
+      // @ts-ignore
         const _tags = tags.filter((tag, id)=>id!==index);
         setTags(_tags);
     }
@@ -82,6 +83,7 @@ export default function TodoForm({ isUploading, handleSave, todo = undefined }: 
         else setSingleTag(_v);
     }
     const onDelete = (id: number) => {
+      // @ts-ignore
         const filteredTask = tasks.filter((task, index) => index != id);
         setTasks(filteredTask);
     }

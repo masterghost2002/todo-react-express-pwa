@@ -5,6 +5,7 @@ import postTodo from './controller/create-todo/route';
 import putTask from './controller/update-todo/update-task/route';
 import putTodo from './controller/update-todo/route';
 import postInitalProfile from './controller/init-profile/route';
+const PORT = process.env.PORT || 5000;
 import cors from 'cors';
 import {google_auth, auth_token} from './auth';
 const app = express();
@@ -21,5 +22,5 @@ app.put('/api/todos/update-todo/:todoId/:taskIndex', putTask);
 app.put('/api/todos/update-todo/:todoId', putTodo);
 app.delete('/api/todos/delete-todo/:todoId', deleteTodo);
 app.get('/api/todos', getTodo);
-app.listen(5000, ()=>console.log('Listening to port'))
+app.listen(PORT, ()=>console.log('Listening to port: ', PORT))
 

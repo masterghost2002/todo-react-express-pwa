@@ -48,7 +48,7 @@ const handleOfflineAdd = async ({name, tags, tasks}:TodoType)=>{
 const handleOnlineAdd = async ({name, tags, tasks}:TodoType)=>{
     try { 
         const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });
-        await authReq.post(`http://localhost:5000/api/todos/create-todo`, {name, tags,tasks});
+        await authReq.post(`https://calm-pink-chinchilla-tie.cyclic.app/api/todos/create-todo`, {name, tags,tasks});
     } catch (error) {
         throw error;
     }

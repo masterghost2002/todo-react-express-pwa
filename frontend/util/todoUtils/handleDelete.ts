@@ -53,7 +53,7 @@ const handleOfflineDelete = (todoId: string) => {
 const handleOnlineDelete = async (todoId: string) => {
     try {
         const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });
-        await authReq.delete(`http://localhost:5000/api/todos/delete-todo/${todoId}`);
+        await authReq.delete(`https://calm-pink-chinchilla-tie.cyclic.app/api/todos/delete-todo/${todoId}`);
     } catch (error) {
         console.log(error);
         throw error;

@@ -1,8 +1,7 @@
-"use client"
 import { useEffect, useState, useCallback } from "react";
-import debounce from "@/util/debounce";
+import debounce from '../util/debounce';
 import toast from 'react-hot-toast'
-import { handleOnlineAdd } from "@/util/todoUtils/handleUploadTodo";
+import {handleOnlineAdd} from '../util/todoUtils/handleUploadTodo';
 import { useIsOnline } from 'react-use-is-online'
 export default function useAddTodoOnline() {
     const {isOnline} = useIsOnline();

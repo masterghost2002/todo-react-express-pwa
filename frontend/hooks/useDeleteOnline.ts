@@ -1,8 +1,7 @@
-"use client"
 import { useEffect, useState, useCallback } from "react";
 import toast from 'react-hot-toast'
-import { handleOnlineDelete } from "@/util/todoUtils/handleDelete";
-import debounce from "@/util/debounce";
+import { handleOnlineDelete } from "../util/todoUtils/handleDelete";
+import debounce from "../util/debounce";
 import { useIsOnline } from 'react-use-is-online'
 
 export default function useDeleteOnline() {

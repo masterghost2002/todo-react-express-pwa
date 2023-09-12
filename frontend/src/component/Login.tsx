@@ -18,16 +18,36 @@ export default function Login() {
   }
   return (
     <div
+      className='h-screen flex flex-col gap-5 items-center justify-center'
     >
-      <GoogleLogin
-        clientId={import.meta.env.VITE_CLIENT_ID || ""}
-        buttonText='Login'
-        onSuccess={handleSuccess}
-        cookiePolicy='single_host_origin'
-        isSignedIn={true}
+      <div
+        className='text-[60px] font-medium flex gap-2 items-center'
       >
+        Todo
+        <img
+          src='./Logo.png'
+          className='h-[60px]'
+        >
+        </img>
+      </div>
+      <div
+        className='text-xl font-medium'
+      >
+        Continue Using Google
+      </div>
+      <div
+      >
+        <GoogleLogin
+          clientId={import.meta.env.VITE_CLIENT_ID || ""}
+          buttonText='Login'
+          onSuccess={handleSuccess}
+          cookiePolicy='single_host_origin'
+          isSignedIn={true}
+          className='w-[120px]'
+        >
+        </GoogleLogin>
+      </div>
 
-      </GoogleLogin>
     </div>
   )
 }

@@ -1,7 +1,6 @@
-"use client"
 import { useEffect, useState, useCallback } from "react";
-import { handleOnlineUpdate } from "@/util/todoUtils/handleTodo";
-import debounce from "@/util/debounce";
+import { handleOnlineUpdate } from "../util/todoUtils/handleTodo";
+import debounce from "../util/debounce";
 import toast from 'react-hot-toast'
 import { useIsOnline } from 'react-use-is-online'
 export default function useUpdateOnline() {

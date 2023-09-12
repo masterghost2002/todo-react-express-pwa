@@ -43,7 +43,7 @@ export default React.memo(function TodoCard({ todo, handleOnDelete, handleTagCli
     try {
       setIsUpdating(true);
       const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });
-      await authReq.put(`http://localhost:5000/api/todos/update-todo/${todo.id}/${index}`);
+      await authReq.put(`https://todo-api-toz9.onrender.com/api/todos/update-todo/${todo.id}/${index}`);
       const task = pendingTasks[index];
       // @ts-ignore
       const _pendingTasks = pendingTasks.filter((task, id) => id !== index);

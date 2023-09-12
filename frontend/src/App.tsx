@@ -18,7 +18,9 @@ export default function App() {
     gapi.load('client:auth2', start)
   }, [])
   return (
-    <>
+    <div
+      className="h-screen"
+    >
       <div><Toaster /></div>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -28,6 +30,6 @@ export default function App() {
           <Route path="edit-todo/:todoId" element={<EditTodoPage/>}/>
         </Route>
       </Routes>
-    </>
+    </div>
   )
 }

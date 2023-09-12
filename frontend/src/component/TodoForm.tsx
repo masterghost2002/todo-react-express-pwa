@@ -125,6 +125,8 @@ export default function TodoForm({ isUploading, handleSave, todo = undefined }: 
                         className='p-2 rounded-md w-full bg-slate-100'
                         value={todoName}
                         onChange={(e) => handleTodoName(e)}
+                        autoComplete='off'
+                        
                     >
                     </input>
                 </div>

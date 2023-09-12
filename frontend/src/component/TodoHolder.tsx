@@ -31,10 +31,14 @@ export default function TodoHolder() {
   const [searchText, setSearchText] = useState('');
   const [showCommand, setShowCommand] = useState(false);
   const [searchResult, setSearchResult] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
   const {isOnline} = useIsOnline();
 
+  
   const goodSearch = useCallback(debounce((searchParam) => {
     if (searchParam.length <= 1) return;    
+    console.log(todos);
+    
     const query = searchParam[0];
     let result: Todo[] = [];
     let searchResultInfo = ''
@@ -69,15 +73,22 @@ export default function TodoHolder() {
     if (searchParam.length <= 1) setFileteredTodos([]);
   }
 
-  const handleTagClick = useCallback((tag: string) => {
+  const handleTagClick = (tag: string) => {
     setSearchText(tag);
     goodSearch(tag);
     setSearchResult('');
-  }, [searchText]);
+  }
 
   const handleOnDelete = useCallback(async (todoId: string) => {
+    if(isDeleting){
+      toast('Please wait prev delete is pending', {
+        icon: '⌛',
+      });
+      return;
+    }
     const toastId = toast.loading('Deleting Todo');
     try {
+      setIsDeleting(true);
       await handleDelete(todoId, isOnline);
       toast.dismiss(toastId);
       toast.success("Todo deleted");
@@ -86,8 +97,10 @@ export default function TodoHolder() {
       console.log(error);
       toast.dismiss(toastId);
       toast.error("Deletion failed");
+    }finally{
+      setIsDeleting(false);
     }
-  }, []);
+  }, [isDeleting]);
 
 
   if (isLoading) {

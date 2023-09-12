@@ -24,7 +24,7 @@ export default function EditTodoPage() {
             await handleUpdate({ name, tasks, tags, todoId }, isOnline);
             toast.dismiss(toastId);
             toast.success('Todo is updated');
-            navigate('/');
+            navigate('/todos');
         } catch (error) {
             toast.dismiss(toastId);
             console.log(error);

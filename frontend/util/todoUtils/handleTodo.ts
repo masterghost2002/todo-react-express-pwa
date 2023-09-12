@@ -63,7 +63,7 @@ const handleOfflineUpdate = async ({name, tags, tasks, todoId}:TodoType)=>{
 }
 const handleOnlineUpdate = async ({name, tags, tasks, todoId}:TodoType)=>{
     try { 
-        const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });
+        const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });     
         await authReq.put(`https://todo-api-toz9.onrender.com/api/todos/update-todo/${todoId}`, {name, tags,tasks, todoId});
     } catch (error) {
         console.log(error);

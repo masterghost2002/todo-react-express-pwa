@@ -3,6 +3,8 @@ import axios from 'axios'
 import { nanoid } from 'nanoid'
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom'
+import {handleChangeTask} from '../../util/todoUtils/handleChangeTask';
+import { useIsOnline } from 'react-use-is-online';
 type TodoCardProps = {
   todo: Todo,
   handleOnDelete: (todoId: string) => void,
@@ -32,6 +34,7 @@ export default React.memo(function TodoCard({ todo, handleOnDelete, handleTagCli
   const [pendingTasks, setPendingTasks] = useState<string[]>(todo.pendingTasks);
   const [completedTasks, setCompletedTasks] = useState<string[]>(todo.completedTasks);
   const [isUpdating, setIsUpdating] = useState(false);
+  const {isOnline} = useIsOnline();
   const handleCompleteClick = async (index: number) => {
     if (isUpdating) {
       toast('Please wait prev update is pending', {
@@ -42,8 +45,7 @@ export default React.memo(function TodoCard({ todo, handleOnDelete, handleTagCli
     const toastId = toast.loading('Changing task state...');
     try {
       setIsUpdating(true);
-      const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });
-      await authReq.put(`https://todo-api-toz9.onrender.com/api/todos/update-todo/${todo.id}/${index}`);
+      await handleChangeTask(todo.id, index, isOnline);
       const task = pendingTasks[index];
       // @ts-ignore
       const _pendingTasks = pendingTasks.filter((task, id) => id !== index);

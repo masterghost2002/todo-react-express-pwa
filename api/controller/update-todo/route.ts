@@ -4,16 +4,16 @@ const db = new PrismaClient();
 export default async function PUT(req: Request, res:Response) {
     
     const {todoId} = req.params;  
-    const {name, tasks, tags} = await req.body;
+    const {name, completedTasks,pendingTasks, tags} = await req.body;
     try {
-        const data = await db.todo.update({
+       await db.todo.update({
             where: {
                 id: todoId,
             },
             data: {
                 name,
-                pendingTasks:tasks,
-                completedTasks:[],
+                pendingTasks:pendingTasks,
+                completedTasks:completedTasks?completedTasks:[],
                 tags
             }
         });      

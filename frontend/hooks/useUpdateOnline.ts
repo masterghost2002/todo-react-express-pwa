@@ -15,7 +15,7 @@ export default function useUpdateOnline() {
             while(_pending.length){
                 const _todo:any | undefined = _pending[_pending.length-1];
                 if(!_todo) return;
-                await handleOnlineUpdate({name:_todo.name,todoId:_todo.id, tags:_todo.tags, tasks:_todo.pendingTodo});
+                await handleOnlineUpdate({name:_todo.name,todoId:_todo.id, tags:_todo.tags, pendingTasks:_todo.pendingTasks, completedTasks:_todo.completedTasks});
                 _pending.pop()
             }
             toast.dismiss(toastId);

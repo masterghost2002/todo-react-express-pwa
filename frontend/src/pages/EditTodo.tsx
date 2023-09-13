@@ -16,12 +16,12 @@ export default function EditTodoPage() {
 
     const { isOnline } = useIsOnline();
 
-    const handleSave = async ({ name, tasks, tags, todoId }: TodoType) => {
+    const handleSave = async ({ name, pendingTasks, tags, todoId }: TodoType) => {
 
         const toastId = toast.loading('Uploading todo');
         try {
             setIsUploading(true);
-            await handleUpdate({ name, tasks, tags, todoId }, isOnline);
+            await handleUpdate({ name, pendingTasks, tags, todoId }, isOnline);
             toast.dismiss(toastId);
             toast.success('Todo is updated');
             navigate('/todos');

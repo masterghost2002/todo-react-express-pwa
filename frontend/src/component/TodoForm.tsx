@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { toast } from 'react-hot-toast'
-import type {Todo} from '../../types';
-export type TodoType = {
-    name:string,
-    tasks:string[],
-    tags:string[],
-    todoId?:string
-}
+import type {Todo, TodoType} from '../../types';
 export type TodoFormType = {
     isUploading:boolean,
     handleSave:(obj:TodoType)=>void,
@@ -219,7 +213,7 @@ export default function TodoForm({ isUploading, handleSave, todo = undefined }: 
                 >
                     <button
                         className='flex gap-2 items-center p-2 bg-blue-500  rounded-md text-white font-medium hover:bg-blue-400'
-                        onClick={() => handleSave({ name:todoName, tasks, tags, todoId:todo?.id })}
+                        onClick={() => handleSave({ name:todoName, pendingTasks:tasks, tags, todoId:todo?.id })}
                         type='button'
                         disabled={isUploading}
                     >

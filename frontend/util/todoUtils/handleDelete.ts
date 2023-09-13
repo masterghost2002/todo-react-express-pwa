@@ -35,17 +35,26 @@ const handleOfflineDelete = (todoId: string) => {
         return;
     }
 
+    // check is in pending update
+    const _pendingUpdates = localStorage.getItem('pendingUpdates');
+    if(_pendingUpdates){
+        const _parsedPendingUpdates = JSON.parse(_pendingUpdates);
+        const _filteredPendingUpdates = _parsedPendingUpdates.filter((todo:Todo)=>todo.id !== todoId);
+        const stringifyPendingUpdates = JSON.stringify(_filteredPendingUpdates);
+        localStorage.setItem('pendingUpdates', stringifyPendingUpdates);
+    }
+
     // create pendingOnline update queue
-    let pendingUpdates = localStorage.getItem('pendingDelete');
-    if (!pendingUpdates) {
-        let _pendingUpdates = [todoId];
-        let _pendingUpdatesStringify = JSON.stringify(_pendingUpdates);
-        localStorage.setItem('pendingDelete', _pendingUpdatesStringify);
+    let pendingDeletes = localStorage.getItem('pendingDelete');
+    if (!pendingDeletes) {
+        let _pendingDeletes = [todoId];
+        let _pendingDeletesStringify = JSON.stringify(_pendingDeletes);
+        localStorage.setItem('pendingDelete', _pendingDeletesStringify);
     }
     else {
-        let _parsedPendingUpdates = JSON.parse(pendingUpdates);
-        let _pendingUpdatesStringify = JSON.stringify({ ..._parsedPendingUpdates, todoId });
-        localStorage.setItem('pendingDelete', _pendingUpdatesStringify);
+        let _parsedPendingDeletes = JSON.parse(pendingDeletes);
+        let _pendingDeletsStringify = JSON.stringify({ ..._parsedPendingDeletes, todoId });
+        localStorage.setItem('pendingDelete', _pendingDeletsStringify);
     }
 
 }

@@ -6,7 +6,7 @@ import {handleAdd} from '../../util/todoUtils/handleUploadTodo';
 import { useIsOnline } from 'react-use-is-online'
 export type TodoType = {
     name:string,
-    tasks:string[],
+    pendingTasks:string[],
     tags:string[],
     todoId?:string
 }
@@ -14,14 +14,14 @@ export default function CreateTodo() {
   const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
   const { isOnline } = useIsOnline();
-  const handleSave = useCallback(async ({ name, tasks, tags }: TodoType) => {
+  const handleSave = useCallback(async ({ name, tags, pendingTasks }: TodoType) => {
     if (name.trim().length === 0) {
       toast.error('Name is required');
       return;
     }
-    if (tasks.length > 0 && tasks[tasks.length - 1].trim().length === 0)
-      tasks.pop();
-    if (tasks.length === 0) {
+    if (pendingTasks.length > 0 && pendingTasks[pendingTasks.length - 1].trim().length === 0)
+    pendingTasks.pop();
+    if (pendingTasks.length === 0) {
       toast.error('Please provide at least one non empty tast');
       return;
     }
@@ -29,7 +29,7 @@ export default function CreateTodo() {
     try {
       setIsUploading(true);
 
-      await handleAdd({ name, tasks, tags }, isOnline);
+      await handleAdd({ name, pendingTasks, tags }, isOnline);
       toast.dismiss(toastId);
       toast.success('Todo is added');
       navigate('/todos')

@@ -19,7 +19,8 @@ export type Todo = {
 }
 export type TodoType = {
     name:string,
-    tasks:string[],
+    pendingTasks:string[],
+    completedTasks?:string[],
     tags:string[],
     todoId?:string
 }

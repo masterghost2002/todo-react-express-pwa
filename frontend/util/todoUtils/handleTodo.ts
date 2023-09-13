@@ -1,14 +1,14 @@
 import {Todo, TodoType} from '../../types'
 import axios from "axios";
-const handleOfflineUpdate = async ({name, tags, tasks, todoId}:TodoType)=>{
+const handleOfflineUpdate = async ({name, tags, pendingTasks, completedTasks, todoId}:TodoType)=>{
     try {
         
         const _localTodo = localStorage.getItem('todos');
         const updatedTodo = {
             id:todoId,
             tags,
-            pendingTasks:tasks,
-            completedTasks:[],
+            pendingTasks:pendingTasks,
+            completedTasks:completedTasks?completedTasks:[],
             name
         }
         if(!_localTodo) throw Error('Failed Local update');
@@ -21,9 +21,21 @@ const handleOfflineUpdate = async ({name, tags, tasks, todoId}:TodoType)=>{
         _parsedTodo[index] = updatedTodo;
  
 
-        const _filteredStringify = await JSON.stringify(_parsedTodo);
+        const _filteredStringify =  JSON.stringify(_parsedTodo);
 
         localStorage.setItem('todos', _filteredStringify);
+
+
+        // check is todo in pendingTask change if yes remove it from the pendingChangeTask 
+        const _pendingTaskChangeTodo = localStorage.getItem('pendingTaskChangeTodo');
+        if(_pendingTaskChangeTodo){
+            localStorage.removeItem('pendingTaskChangeTodo');
+            const _parsedPendingTaskChangeTodo = await JSON.parse(_pendingTaskChangeTodo);
+            const _filteredPendingTaskChangeTodo = _parsedPendingTaskChangeTodo.filter((todo:Todo)=>todo.id  !== todoId);
+            const _stringifyPendingTaskChangeTodo = JSON.stringify(_filteredPendingTaskChangeTodo);
+            localStorage.setItem('pendingChangeTaskTodo', _stringifyPendingTaskChangeTodo);
+            
+        }
         
 
         // check if the current todo is in pendingAdd if yes then simply update it in pendingNewTodo and return
@@ -61,20 +73,22 @@ const handleOfflineUpdate = async ({name, tags, tasks, todoId}:TodoType)=>{
     }
 
 }
-const handleOnlineUpdate = async ({name, tags, tasks, todoId}:TodoType)=>{
+const handleOnlineUpdate = async ({name, tags, completedTasks, pendingTasks, todoId}:TodoType)=>{
     try { 
         const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });     
-        await authReq.put(`https://todo-api-toz9.onrender.com/api/todos/update-todo/${todoId}`, {name, tags,tasks, todoId});
+        await authReq.put(`https://todo-api-toz9.onrender.com/api/todos/update-todo/${todoId}`, {name, tags,completedTasks,pendingTasks, todoId});
+        // await authReq.put(`http://localhost:5000/api/todos/update-todo/${todoId}`, {name, tags,completedTasks,pendingTasks, todoId});
+
     } catch (error) {
         console.log(error);
         throw error;
     }
 }
-const handleUpdate = async ({name, tags, tasks, todoId,}:TodoType, isOnline:boolean)=>{
+const handleUpdate = async ({name, tags, pendingTasks,completedTasks, todoId,}:TodoType, isOnline:boolean)=>{
     try {
         if(!isOnline)
-           await handleOfflineUpdate({name, tags, tasks, todoId});
-        else await handleOnlineUpdate({name, tags, tasks, todoId})
+           await handleOfflineUpdate({name, tags, pendingTasks,completedTasks, todoId});
+        else await handleOnlineUpdate({name, tags, pendingTasks,completedTasks, todoId})
     } catch (error) {
         console.log(error);
         throw error

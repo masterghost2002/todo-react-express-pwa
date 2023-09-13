@@ -14,6 +14,9 @@ const manifestForPlugIn = {
     "name": "Todo",
     "description": "A basic todo app build over NextJS",
     "short_name": "Todo",
+    includeAssets: [
+      "**/*",
+    ],
     "icons": [
       {
         "src": "/icon-192x192.png",

@@ -14,7 +14,7 @@ export default function CreateTodo() {
   const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
   const { isOnline } = useIsOnline();
-  const handleSave = useCallback(async ({ name, tags, pendingTasks }: TodoType) => {
+  const handleSave = useCallback(async ({ name, tags, pendingTasks }: TodoType) => {  
     if (name.trim().length === 0) {
       toast.error('Name is required');
       return;

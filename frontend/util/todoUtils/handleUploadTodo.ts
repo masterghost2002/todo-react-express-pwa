@@ -49,7 +49,7 @@ const handleOfflineAdd = async ({name, tags, pendingTasks, completedTasks}:TodoT
     }
 
 }
-const handleOnlineAdd = async ({name, tags, pendingTasks, completedTasks}:TodoType)=>{
+const handleOnlineAdd = async ({name, tags, pendingTasks, completedTasks}:TodoType)=>{ 
     try { 
         const authReq = axios.create({ headers: { token: `Bearer ${localStorage.getItem('accessToken')}` } });
         await authReq.post(`https://todo-api-toz9.onrender.com/api/todos/create-todo`, {name, tags,pendingTasks, completedTasks});

@@ -31,6 +31,7 @@ const handleChangeTaskOffline = async (todoId: string, taskIndex:number) => {
             _parsedPendingNewTodo[index]  =_pendingTaskUpdateTodo;
             const _stringifyParsedPendingNewTodo = JSON.stringify(_parsedPendingNewTodo);
             localStorage.setItem('pendingNewTodo', _stringifyParsedPendingNewTodo);
+            return;
         }
         
     }
